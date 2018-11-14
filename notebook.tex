@@ -1,0 +1,649 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Trabalho de Calculo II}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{alunos-david-de-moura-marques-e-magno-macedo-de-oliveira}{%
+\paragraph{Alunos: David de Moura Marques e Magno Macedo de
+Oliveira}\label{alunos-david-de-moura-marques-e-magno-macedo-de-oliveira}}
+
+\hypertarget{grupo-v---suxe9ries-a-e-ii}{%
+\paragraph{Grupo V - Séries ``a e
+II''}\label{grupo-v---suxe9ries-a-e-ii}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  \(\sum_{n=1}^{\infty} \frac{n}{n^4+1}\)
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \(\sum_{n=1}^{\infty} \frac{(-1)^n.n}{10^n}\)
+\end{enumerate}
+
+    \hypertarget{verificar-se-as-suxe9ries-convergem}{%
+\section{Verificar se as séries
+convergem:}\label{verificar-se-as-suxe9ries-convergem}}
+
+\hypertarget{a-sum_n1infty-fracnn41}{%
+\subsection{\texorpdfstring{(a)
+\(\sum_{n=1}^{\infty} \frac{n}{n^4+1}\)}{(a) \textbackslash{}sum\_\{n=1\}\^{}\{\textbackslash{}infty\} \textbackslash{}frac\{n\}\{n\^{}4+1\}}}\label{a-sum_n1infty-fracnn41}}
+
+Seja f(x) = \(\sum_{n=1}^{\infty} \frac{n}{n^4+1}\), h(x) =
+\(\sum_{n=1}^{\infty} \frac{n}{n^4}\) e g(x) =
+\(\sum_{n=1}^{\infty} \frac{1}{n^3}\), então f(x) \textless{}= h(x)
+\textless{} g(x)
+
+E g(x) converge (P-Série, P=3) logo, pelo Teste da Comparação, F(x)
+converge.
+
+\hypertarget{ii-sum_n1infty-frac-1n.n10n}{%
+\subsection{\texorpdfstring{(II)
+\(\sum_{n=1}^{\infty} \frac{(-1)^n.n}{10^n}\)}{(II) \textbackslash{}sum\_\{n=1\}\^{}\{\textbackslash{}infty\} \textbackslash{}frac\{(-1)\^{}n.n\}\{10\^{}n\}}}\label{ii-sum_n1infty-frac-1n.n10n}}
+
+Este é um exemplo de uma série alternada, para verificar sua
+convergência, faremos dois testes:
+
+Se \(b_{n+1} <= b_{n}\)
+
+E se \(\lim_{n\to\infty} b_{n} = 0\)
+
+Dado que \(b_{n} = \frac{n}{10^n}\) então
+\(b_{n+1} = \frac{n+1}{10^{n+1}}\), logo \(b_{n+1} <= b_{n}\)
+
+Calculemos agora \(\lim_{n\to\infty} b_{n}\)
+
+\(\lim_{n\to\infty} \frac{n}{10^n}\) =
+\(\lim_{n\to\infty} \frac{1}{10^n log(10)} = 0\)
+
+Por tanto, a série converge
+
+    \hypertarget{calcular-quantas-operauxe7uxf5es-suxe3o-necessuxe1rias-para-determinar-a-soma-de-uma-suxe9rie-infinita-com-uma-precisuxe3o-de-000000001-e-00000001}{%
+\section{Calcular quantas operações são necessárias para determinar a
+soma de uma série infinita com uma precisão de 0,00000001 ( e
+\textless{}
+0,0000001)}\label{calcular-quantas-operauxe7uxf5es-suxe3o-necessuxe1rias-para-determinar-a-soma-de-uma-suxe9rie-infinita-com-uma-precisuxe3o-de-000000001-e-00000001}}
+
+Métodos a serem utilizados:
+
+\hypertarget{o-erro-e-seruxe1-obtido-fazendo}{%
+\subsection{O erro e será obtido,
+fazendo:}\label{o-erro-e-seruxe1-obtido-fazendo}}
+
+e = \(S_{n} - S_{n-1}\) , onde:
+
+\(S_{n}\) : É a enésima soma;
+
+\(S_{n-1}\) : É a soma anterior a enésima soma;
+
+\hypertarget{o-erro-e-seruxe1-obtido-utilizando-a-estimativa-do-resto-para-integral-ou-utilizando-o-teorema-de-estimativa-de-suxe9ries-alternadas-de-acordo-com-a-suxe9rie.}{%
+\subsection{O erro e será obtido utilizando a estimativa do resto para
+integral ou utilizando o teorema de estimativa de séries alternadas, de
+acordo com a
+série.}\label{o-erro-e-seruxe1-obtido-utilizando-a-estimativa-do-resto-para-integral-ou-utilizando-o-teorema-de-estimativa-de-suxe9ries-alternadas-de-acordo-com-a-suxe9rie.}}
+
+\hypertarget{a-estimativa-de-resto-para-integral-uxe9-dada-por}{%
+\subsubsection{A estimativa de resto para integral é dada
+por:}\label{a-estimativa-de-resto-para-integral-uxe9-dada-por}}
+
+e = \(\int_{n+1}^{\infty} f(x) dx\)
+
+\hypertarget{o-teorema-de-estimativa-de-suxe9ries-alternadas}{%
+\subsubsection{O teorema de estimativa de séries
+alternadas:}\label{o-teorema-de-estimativa-de-suxe9ries-alternadas}}
+
+Se \(S = (-1)^{n-1} b_{n}\) for a soma de uma série alternada que
+satisfaz∶ \(0 <= b_{n+1} <= b_{n}\) e \(\lim_{n\to\infty} b_{n} = 0\)
+então \(R_{n} <= b_{n+1}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{integrate} \PY{k}{import} \PY{n}{quad}
+          \PY{k+kn}{import} \PY{n+nn}{texttable} \PY{k}{as} \PY{n+nn}{tt}
+          \PY{k+kn}{from} \PY{n+nn}{sympy} \PY{k}{import} \PY{n}{Poly}\PY{p}{,} \PY{n}{Symbol}\PY{p}{,} \PY{n}{init\PYZus{}printing}\PY{p}{,} \PY{n}{latex}
+          \PY{k+kn}{from} \PY{n+nn}{sympy}\PY{n+nn}{.}\PY{n+nn}{solvers}\PY{n+nn}{.}\PY{n+nn}{inequalities} \PY{k}{import} \PY{n}{reduce\PYZus{}rational\PYZus{}inequalities}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{k}{def} \PY{n+nf}{serieA}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{serie} \PY{o}{=} \PY{n}{n}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{serie}
+         
+         \PY{k}{def} \PY{n+nf}{mod}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{num} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{num} \PY{o}{*} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{num}
+         
+         \PY{k}{def} \PY{n+nf}{calculaErroI}\PY{p}{(}\PY{n}{serie}\PY{p}{)}\PY{p}{:}
+             \PY{n}{erro} \PY{o}{=} \PY{l+m+mf}{1.0}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{si} \PY{o}{=} \PY{l+m+mf}{0.0}
+             \PY{n}{sii} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{n}{tabela} \PY{o}{=} \PY{n}{tt}\PY{o}{.}\PY{n}{Texttable}\PY{p}{(}\PY{p}{)}
+             \PY{n}{tabela}\PY{o}{.}\PY{n}{header}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nro Op}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Si}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Si+1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{erro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{tabela}\PY{o}{.}\PY{n}{set\PYZus{}cols\PYZus{}dtype}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} 
+             \PY{n}{tabela}\PY{o}{.}\PY{n}{set\PYZus{}precision}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}
+             \PY{k}{while} \PY{n}{erro} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.0000001}\PY{p}{:}
+                 \PY{n}{si} \PY{o}{=} \PY{n}{serieA}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                 \PY{n}{sii} \PY{o}{=} \PY{n}{serieA}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{erro} \PY{o}{=} \PY{n}{mod}\PY{p}{(}\PY{n}{sii} \PY{o}{\PYZhy{}} \PY{n}{si}\PY{p}{)}
+                 \PY{n}{tabela}\PY{o}{.}\PY{n}{add\PYZus{}row}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{si}\PY{p}{,}\PY{n}{sii}\PY{p}{,}\PY{n}{erro}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{tabela}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{suxe9rie-a-sum_n1infty-fracnn41}{%
+\subsection{\texorpdfstring{Série a:
+\(\sum_{n=1}^{\infty} \frac{n}{n^4+1}\)}{Série a: \textbackslash{}sum\_\{n=1\}\^{}\{\textbackslash{}infty\} \textbackslash{}frac\{n\}\{n\^{}4+1\}}}\label{suxe9rie-a-sum_n1infty-fracnn41}}
+
+\hypertarget{utilizando-o-muxe9todo-2.1}{%
+\subsubsection{Utilizando o método
+2.1}\label{utilizando-o-muxe9todo-2.1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{calculaErroI}\PY{p}{(}\PY{n}{serieA}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++--------+-------------+-------------+-------------+
+| Nro Op |     Si      |    Si+1     |    erro     |
++========+=============+=============+=============+
+| 1      | 0.500000000 | 0.117647059 | 0.382352941 |
++--------+-------------+-------------+-------------+
+| 2      | 0.117647059 | 0.036585366 | 0.081061693 |
++--------+-------------+-------------+-------------+
+| 3      | 0.036585366 | 0.015564202 | 0.021021164 |
++--------+-------------+-------------+-------------+
+| 4      | 0.015564202 | 0.007987220 | 0.007576982 |
++--------+-------------+-------------+-------------+
+| 5      | 0.007987220 | 0.004626060 | 0.003361160 |
++--------+-------------+-------------+-------------+
+| 6      | 0.004626060 | 0.002914238 | 0.001711822 |
++--------+-------------+-------------+-------------+
+| 7      | 0.002914238 | 0.001952648 | 0.000961590 |
++--------+-------------+-------------+-------------+
+| 8      | 0.001952648 | 0.001371533 | 0.000581115 |
++--------+-------------+-------------+-------------+
+| 9      | 0.001371533 | 0.000999900 | 0.000371633 |
++--------+-------------+-------------+-------------+
+| 10     | 0.000999900 | 0.000751263 | 0.000248637 |
++--------+-------------+-------------+-------------+
+| 11     | 0.000751263 | 0.000578676 | 0.000172588 |
++--------+-------------+-------------+-------------+
+| 12     | 0.000578676 | 0.000455150 | 0.000123526 |
++--------+-------------+-------------+-------------+
+| 13     | 0.000455150 | 0.000364422 | 0.000090728 |
++--------+-------------+-------------+-------------+
+| 14     | 0.000364422 | 0.000296290 | 0.000068132 |
++--------+-------------+-------------+-------------+
+| 15     | 0.000296290 | 0.000244137 | 0.000052154 |
++--------+-------------+-------------+-------------+
+| 16     | 0.000244137 | 0.000203539 | 0.000040598 |
++--------+-------------+-------------+-------------+
+| 17     | 0.000203539 | 0.000171466 | 0.000032073 |
++--------+-------------+-------------+-------------+
+| 18     | 0.000171466 | 0.000145793 | 0.000025673 |
++--------+-------------+-------------+-------------+
+| 19     | 0.000145793 | 0.000124999 | 0.000020794 |
++--------+-------------+-------------+-------------+
+| 20     | 0.000124999 | 0.000107979 | 0.000017020 |
++--------+-------------+-------------+-------------+
+| 21     | 0.000107979 | 0.000093914 | 0.000014065 |
++--------+-------------+-------------+-------------+
+| 22     | 0.000093914 | 0.000082189 | 0.000011725 |
++--------+-------------+-------------+-------------+
+| 23     | 0.000082189 | 0.000072338 | 0.000009851 |
++--------+-------------+-------------+-------------+
+| 24     | 0.000072338 | 0.000064000 | 0.000008338 |
++--------+-------------+-------------+-------------+
+| 25     | 0.000064000 | 0.000056896 | 0.000007104 |
++--------+-------------+-------------+-------------+
+| 26     | 0.000056896 | 0.000050805 | 0.000006090 |
++--------+-------------+-------------+-------------+
+| 27     | 0.000050805 | 0.000045554 | 0.000005251 |
++--------+-------------+-------------+-------------+
+| 28     | 0.000045554 | 0.000041002 | 0.000004552 |
++--------+-------------+-------------+-------------+
+| 29     | 0.000041002 | 0.000037037 | 0.000003965 |
++--------+-------------+-------------+-------------+
+| 30     | 0.000037037 | 0.000033567 | 0.000003470 |
++--------+-------------+-------------+-------------+
+| 31     | 0.000033567 | 0.000030518 | 0.000003050 |
++--------+-------------+-------------+-------------+
+| 32     | 0.000030518 | 0.000027826 | 0.000002691 |
++--------+-------------+-------------+-------------+
+| 33     | 0.000027826 | 0.000025443 | 0.000002384 |
++--------+-------------+-------------+-------------+
+| 34     | 0.000025443 | 0.000023324 | 0.000002119 |
++--------+-------------+-------------+-------------+
+| 35     | 0.000023324 | 0.000021433 | 0.000001890 |
++--------+-------------+-------------+-------------+
+| 36     | 0.000021433 | 0.000019742 | 0.000001691 |
++--------+-------------+-------------+-------------+
+| 37     | 0.000019742 | 0.000018224 | 0.000001518 |
++--------+-------------+-------------+-------------+
+| 38     | 0.000018224 | 0.000016858 | 0.000001366 |
++--------+-------------+-------------+-------------+
+| 39     | 0.000016858 | 0.000015625 | 0.000001233 |
++--------+-------------+-------------+-------------+
+| 40     | 0.000015625 | 0.000014509 | 0.000001116 |
++--------+-------------+-------------+-------------+
+| 41     | 0.000014509 | 0.000013497 | 0.000001012 |
++--------+-------------+-------------+-------------+
+| 42     | 0.000013497 | 0.000012578 | 0.000000920 |
++--------+-------------+-------------+-------------+
+| 43     | 0.000012578 | 0.000011739 | 0.000000838 |
++--------+-------------+-------------+-------------+
+| 44     | 0.000011739 | 0.000010974 | 0.000000765 |
++--------+-------------+-------------+-------------+
+| 45     | 0.000010974 | 0.000010274 | 0.000000700 |
++--------+-------------+-------------+-------------+
+| 46     | 0.000010274 | 0.000009632 | 0.000000642 |
++--------+-------------+-------------+-------------+
+| 47     | 0.000009632 | 0.000009042 | 0.000000590 |
++--------+-------------+-------------+-------------+
+| 48     | 0.000009042 | 0.000008500 | 0.000000542 |
++--------+-------------+-------------+-------------+
+| 49     | 0.000008500 | 0.000008000 | 0.000000500 |
++--------+-------------+-------------+-------------+
+| 50     | 0.000008000 | 0.000007539 | 0.000000461 |
++--------+-------------+-------------+-------------+
+| 51     | 0.000007539 | 0.000007112 | 0.000000427 |
++--------+-------------+-------------+-------------+
+| 52     | 0.000007112 | 0.000006717 | 0.000000395 |
++--------+-------------+-------------+-------------+
+| 53     | 0.000006717 | 0.000006351 | 0.000000366 |
++--------+-------------+-------------+-------------+
+| 54     | 0.000006351 | 0.000006011 | 0.000000340 |
++--------+-------------+-------------+-------------+
+| 55     | 0.000006011 | 0.000005694 | 0.000000316 |
++--------+-------------+-------------+-------------+
+| 56     | 0.000005694 | 0.000005400 | 0.000000294 |
++--------+-------------+-------------+-------------+
+| 57     | 0.000005400 | 0.000005125 | 0.000000275 |
++--------+-------------+-------------+-------------+
+| 58     | 0.000005125 | 0.000004869 | 0.000000256 |
++--------+-------------+-------------+-------------+
+| 59     | 0.000004869 | 0.000004630 | 0.000000239 |
++--------+-------------+-------------+-------------+
+| 60     | 0.000004630 | 0.000004406 | 0.000000224 |
++--------+-------------+-------------+-------------+
+| 61     | 0.000004406 | 0.000004196 | 0.000000210 |
++--------+-------------+-------------+-------------+
+| 62     | 0.000004196 | 0.000003999 | 0.000000197 |
++--------+-------------+-------------+-------------+
+| 63     | 0.000003999 | 0.000003815 | 0.000000185 |
++--------+-------------+-------------+-------------+
+| 64     | 0.000003815 | 0.000003641 | 0.000000173 |
++--------+-------------+-------------+-------------+
+| 65     | 0.000003641 | 0.000003478 | 0.000000163 |
++--------+-------------+-------------+-------------+
+| 66     | 0.000003478 | 0.000003325 | 0.000000153 |
++--------+-------------+-------------+-------------+
+| 67     | 0.000003325 | 0.000003180 | 0.000000145 |
++--------+-------------+-------------+-------------+
+| 68     | 0.000003180 | 0.000003044 | 0.000000136 |
++--------+-------------+-------------+-------------+
+| 69     | 0.000003044 | 0.000002915 | 0.000000129 |
++--------+-------------+-------------+-------------+
+| 70     | 0.000002915 | 0.000002794 | 0.000000121 |
++--------+-------------+-------------+-------------+
+| 71     | 0.000002794 | 0.000002679 | 0.000000115 |
++--------+-------------+-------------+-------------+
+| 72     | 0.000002679 | 0.000002571 | 0.000000109 |
++--------+-------------+-------------+-------------+
+| 73     | 0.000002571 | 0.000002468 | 0.000000103 |
++--------+-------------+-------------+-------------+
+| 74     | 0.000002468 | 0.000002370 | 0.000000097 |
++--------+-------------+-------------+-------------+
+
+    \end{Verbatim}
+
+    \hypertarget{utilizando-o-muxe9todo-2.2.1}{%
+\subsubsection{Utilizando o método
+2.2.1}\label{utilizando-o-muxe9todo-2.2.1}}
+
+\hypertarget{para-esta-suxe9rie-deve-se-utilizar-o-muxe9todo-2.1-ao-invuxe9s-do-2.2-pois-nuxe3o-se-trata-de-uma-suxe9rie-alternada}{%
+\subparagraph{Para esta série deve-se utilizar o método 2.1 ao invés do
+2.2 pois não se trata de uma série
+alternada}\label{para-esta-suxe9rie-deve-se-utilizar-o-muxe9todo-2.1-ao-invuxe9s-do-2.2-pois-nuxe3o-se-trata-de-uma-suxe9rie-alternada}}
+
+De acordo com 1.1, podemos escrever esta série como
+\(\int_{n+1}^{\infty} \frac{1}{x^3} dx\)
+
+Resolvendo esta integral teremos:
+
+\(\int_{n+1}^{\infty} \frac{1}{x^3} dx = \frac{x^{-3+1}}{-3+1} = - \frac{x^{-2}}{x^2} = - \frac{\frac{1}{x^2}}{2} = - \frac{1}{2x^2} ]_{n+1}^{\infty}\)
+
+\$\lim\_\{x\to\infty\} - \frac{1}{2x^2} - (- \frac{1}{2(n+1)^2}) = 0 +
+\frac{1}{2(n+1)^2} = \frac{1}{2(n+1)^2} \$
+
+onde \(n\) será nosso erro.
+
+Calculando \(n\):
+
+\$ \frac{1}{2(n+1)^2} \textless{} 0,0000001 \$
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{k}{def} \PY{n+nf}{solveIneq}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{n} \PY{o}{=} \PY{n}{Symbol}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{real}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{k}{return} \PY{n}{reduce\PYZus{}rational\PYZus{}inequalities}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.0000001}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{referuxeancias}{%
+\section{Referências}\label{referuxeancias}}
+
+    \begin{itemize}
+\tightlist
+\item
+  \url{https://pt.sharelatex.com/learn/Integrals,_sums_and_limits\#Integrals}
+\item
+  \url{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\#links}
+\item
+  \url{https://github.com/foutaise/texttable}
+\item
+  \url{https://www.symbolab.com/}
+\item
+  \url{http://www.wolframalpha.com/}
+\item
+  \url{http://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting\%20Equations.html}
+\item
+  STEWART, James. Cálculo, Vol. 2, 7a Ediçao. Thomson Learning.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
